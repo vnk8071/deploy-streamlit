@@ -11,15 +11,13 @@ st.set_page_config(page_title="Stroke Prediction", layout="wide")
 
 st.title("Stroke Prediction")
 st.write("""
-# The project to predict the risk of stroke \n
+## The project to predict the risk of stroke \n
 The data was collected from Kaggle Community. \n
 Link: https://www.kaggle.com/fedesoriano/stroke-prediction-dataset
 """)
-
+st.markdown('**_For information_**: https://github.com/vnk8071')
+st.write("------------------------------------------------------------------------------------")
 st.write("Please set your profile to predict")
-classifier_model = st.sidebar.selectbox("Select model", ("Logistic Regression",\
-                        "LightGBM Classifier", "Random Forest", "XGB Classifier",\
-                        "Adaboosting Classifier", "Decision Tree"))
 
 
 def input_user():
@@ -44,12 +42,15 @@ def input_user():
                                                       "smokes", "Unknown"))
 
     # Change into array
-    patient = {"gender": [gender],"age": [age], "hypertension": [hypertension],\
+    patient_infor = {"gender": [gender],"age": [age], "hypertension": [hypertension],\
                 "heart_disease": [heart_disease], "Residence_type": [residence],\
                 "avg_glucose_level": [avg_glucose], "bmi": [bmi_value],\
                 "smoking_status": [smoking]}
-    patient = pd.DataFrame(patient)
-    patient = label_encoder(patient)
+    patient_infor = pd.DataFrame(patient_infor)
+    return patient_infor
+
+def preprocess(patient_infor):
+    patient = label_encoder(patient_infor)
     patient = np.array(patient)
     return patient
 
@@ -57,9 +58,20 @@ def input_user():
 if __name__ == '__main__':
     
     # Input of patient
-    patient = input_user()
-    st.write("The input of patient", patient) 
-    st.markdown("The model prediction: " + classifier_model)
+    patient_infor = input_user()
+    patient = preprocess(patient_infor)
+    st.write("------------------------------------------------------------------------------------")
+    footer_col1, footer_col2 = st.beta_columns([1,3]) 
+    with footer_col1:
+        classifier_model = st.selectbox("Select model predict",("Logistic Regression",\
+                            "LightGBM Classifier", "Random Forest", "XGB Classifier",\
+                            "Adaboosting Classifier", "Decision Tree"))
+        st.write("The model prediction:")
+        st.write(classifier_model)
+        
+    with footer_col2:
+        st.write("The input of patient")
+        st.write(patient_infor)
 
     # Start to predict
     start = st.button("Start predict")
@@ -67,7 +79,7 @@ if __name__ == '__main__':
         output = StrokeDectector(classifier_model)
         output = output.predict(patient)
         st.write("The result of predict: ", output)
-        st.write("Done")
+        st.success("Done :sunglasses:")
     else:
         st.write("Set patient profile again")
 
