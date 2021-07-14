@@ -1,9 +1,9 @@
-py -m pip install numpy==1.10.1
-py -m pip install pandas==1.2.4
-py -m pip install scikit-learn==0.24.1
-py -m pip install requests==2.25.1
-py -m pip install pytest-shutil==1.7.0
-py -m pip install imblearn==0.0
-py -m pip install xgboost==1.4.2
-py -m pip install lightGBM==3.2.1
-py -m pip install streamlit==0.84.1
+numpy==1.10.1
+pandas==1.2.4
+scikit-learn==0.24.1
+requests==2.25.1
+pytest-shutil==1.7.0
+imblearn==0.0
+xgboost==1.4.2
+lightGBM==3.2.1
+streamlit==0.84.1
