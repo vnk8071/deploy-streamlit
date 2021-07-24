@@ -10,7 +10,7 @@ We use 6 models of Machine Learning (Logistic Regression, lightGBM, xgboost, Ada
 
 The output expected: Logistic Regreesion has area under curve (82%) higher than each other. 
 
-The website deploy stroke prediction: https://share.streamlit.io/vnk8071/deploy-stroke-prediction/streamlit.py
+The website deploy stroke prediction: https://share.streamlit.io/vnk8071/deploy-streamlit
 
 ## Install 
 Create virtual environment
